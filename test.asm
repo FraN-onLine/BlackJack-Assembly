@@ -12,4 +12,4 @@ syscall
 li $v0, 10
 syscall
 
-#noted na gumagana yung MIPS dito
+//noted na gumagana yung MIPS dito
