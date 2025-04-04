@@ -1,2 +1,4 @@
 ## MIPS 32 PROJECT Concept
- Blackjack Simulator
+ > Blackjack Simulator
+ > Maybe Soduku
+ > Testing Grounds
