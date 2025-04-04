@@ -28,3 +28,9 @@ cpuCount:    .word 0
 
 .text
 .globl main
+
+
+main:
+	la $a0, prompt
+	li $v0, 4
+	syscall
