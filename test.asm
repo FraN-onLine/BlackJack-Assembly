@@ -1,66 +1,30 @@
+#Blackjack simulator
+
 .data
+prompt:      .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. View Hint\n4.Run Again\n"
+winMsg:      .asciiz "\nYou win!\n"
+loseMsg:     .asciiz "\nYou lose.\n"
+drawMsg:     .asciiz "\nDraw.\n"
+scoreMsg:    .asciiz "\nYour total: "
+cpuScoreMsg: .asciiz "\nDealer total: "
+newline:     .asciiz "\n"
+cardLabel:   .asciiz "Card: "
+hearts:      .asciiz "\u2665"
+diamonds:    .asciiz "\u2666"
+clubs:       .asciiz "\u2663"
+spades:      .asciiz "\u2660"
 
-prompt1: .asciiz "Enter Integer: "
+# Deck (4 suits x 13 cards) using values 1-52, mapped to value/suit later
+fullDeck:    .word 1,2,3,4,5,6,7,8,9,10,11,12,13,
+             14,15,16,17,18,19,20,21,22,23,24,25,26,
+             27,28,29,30,31,32,33,34,35,36,37,38,39,
+             40,41,42,43,44,45,46,47,48,49,50,51,52
 
-prompt2: .asciiz "Enter Bit Position(0-31): "
-
-output: .asciiz "\nOutput: "
+deckSize:    .word 52
+playerHand:  .space 52
+cpuHand:     .space 52
+playerCount: .word 0
+cpuCount:    .word 0
 
 .text
-
 .globl main
-
-main:
-
-	li $v0, 4
-
-	la $a0, prompt1
-
-	syscall
-
-	li $v0, 5
-
-	syscall
-
-	move $s0, $v0 #store integer input
-
-getBitPosition:
-
-	li $v0, 4
-
-	la $a0, prompt2
-
-	syscall
-
-	li $v0, 5
-
-	syscall
-
-	move $s1, $v0 #store bit position
-
-	bgt $s1, 31, getBitPosition
-
-	
-
-	srlv $t0, $s0, $s1  # Shift right by $s1 bits
-
-    	andi $t0, $t0, 1   # Isolate the least significant bit
-
-    	#this is because a bitwise and with ..0000001 will get the lsb
-
-    	li $v0, 4
-
-	la $a0, output
-
-	syscall
-
-	li $v0, 1
-
-	move $a0, $t0
-
-	syscall
-
-  	li $v0, 10 # Exit program 
-
-	syscall
-
