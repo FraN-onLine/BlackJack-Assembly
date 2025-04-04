@@ -1,25 +1,18 @@
-#Blackjack simulator
+#Blackjack simulator test
+#fucking difficult raah
 
 .data
-prompt:      .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. View Hint\n4.Run Again\n"
+prompt:      .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. Run Again\n4. View Hint\n5. View Your Cards\n> "
 winMsg:      .asciiz "\nYou win!\n"
 loseMsg:     .asciiz "\nYou lose.\n"
 drawMsg:     .asciiz "\nDraw.\n"
+hintMsg:     .asciiz "\nCalculating Hint...\n"
 scoreMsg:    .asciiz "\nYour total: "
 cpuScoreMsg: .asciiz "\nDealer total: "
 newline:     .asciiz "\n"
 cardLabel:   .asciiz "Card: "
-hearts:      .asciiz "\u2665"
-diamonds:    .asciiz "\u2666"
-clubs:       .asciiz "\u2663"
-spades:      .asciiz "\u2660"
 
-# Deck (4 suits x 13 cards) using values 1-52, mapped to value/suit later
-fullDeck:    .word 1,2,3,4,5,6,7,8,9,10,11,12,13,
-             14,15,16,17,18,19,20,21,22,23,24,25,26,
-             27,28,29,30,31,32,33,34,35,36,37,38,39,
-             40,41,42,43,44,45,46,47,48,49,50,51,52
-
+deck: .asciiz "A23"
 deckSize:    .word 52
 playerHand:  .space 52
 cpuHand:     .space 52
@@ -29,6 +22,21 @@ cpuCount:    .word 0
 .text
 .globl main
 
+main:
+    	li   $v0, 42 #randomint
+    	li   $a1, 3  #Draws Between 1-52
+    	syscall            
+	
+	move $v0, $a0
+	 la $t0, deck #loads the adress of the string
+       add  $t0, $t0, $v0
+	lbu $a0, 0($t0)
+	li $v0, 11
+	syscall
+
+	#a $a0,  prompt
+	#i $v0, 4
+	#yscall
 
 main:
 	la $a0, prompt
