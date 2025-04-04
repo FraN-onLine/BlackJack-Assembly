@@ -2,7 +2,7 @@
 #fucking difficult raah
 
 .data
-prompt:      .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. Run Again\n4. View Hint\n5. View Your Cards\n> "
+prompt:      .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. Run Again\n> "
 winMsg:      .asciiz "\nYou win!\n"
 loseMsg:     .asciiz "\nYou lose.\n"
 drawMsg:     .asciiz "\nDraw.\n"
@@ -37,8 +37,3 @@ main:
 	#a $a0,  prompt
 	#i $v0, 4
 	#yscall
-
-main:
-	la $a0, prompt
-	li $v0, 4
-	syscall
