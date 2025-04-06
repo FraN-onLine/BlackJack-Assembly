@@ -12,7 +12,7 @@ cpuScoreMsg: .asciiz "\nDealer total: "
 newline:     .asciiz "\n"
 cardLabel:   .asciiz "Card: "
 
-deck: .asciiz "A23456789IJQK" #I is 10
+deck: .asciiz "A23456789TJQK" #T is 10
 deckSize:    .word 52
 playerHand:  .space 52
 cpuHand:     .space 52
