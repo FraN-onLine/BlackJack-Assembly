@@ -10,6 +10,8 @@ cardLabel:      .asciiz "Card: "
 suits:          .asciiz "SHCD"         # Spade, Heart, Club, Diamond
 deck:           .asciiz "A23456789TJQK" #T is 10
 newline:        .asciiz "\n"
+usedCards: .space 52  #1 byte per card, all init to 0
+
 
 deckSize:       .word 52
 playerHand:     .space 52
@@ -22,10 +24,22 @@ dealerCount:       .word 0
 
 main:
 
+DrawCard:
     li   $v0, 42  #randomint
     li   $a1, 52  #Draws Between 1-52
     syscall
     move $t0, $a0  #move number to $t0
+    
+    #check if number is previously drawn
+    la   $t1, usedCards #load used cards array
+    add  $t2, $t1, $t0  #check the val on that pos
+    lbu  $t3, 0($t2)  
+
+    bne  $t3, $zero, DrawCard  # if has val, draw again
+
+    #mark as used
+    li   $t3, 1
+    sb   $t3, 0($t2)  # usedCards[$t0] = 1
     
     #rank determiner
     li   $t1, 13            #there are 13 ranks
@@ -67,4 +81,3 @@ main:
     #exit
     li   $v0, 10
     syscall
-
