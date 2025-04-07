@@ -1,6 +1,5 @@
 #Blackjack simulator test
 #fucking difficult raah
-#github test
 
 .data
 prompt:         .asciiz "\nChoose an option:\n1. Hit\n2. Stand\n3. Run Again\n> "
@@ -15,15 +14,15 @@ usedCards: .space 52  #1 byte per card, all init to 0
 
 deckSize:       .word 52
 playerHand:     .space 52
-dealerHand:        .space 52
-playerCount:    .word 0
-dealerCount:       .word 0
+dealerHand:     .space 52
+playerCount:    .word 0 #storage of player sum
+dealerCount:    .word 0 #storage of dealer sum
 
 .text
 .globl main
 
 main:
-
+#should be declared as a function but idk how to make a func in assembly 
 DrawCard:
     li   $v0, 42  #randomint
     li   $a1, 52  #Draws Between 1-52
